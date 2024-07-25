@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Name;
 use JetBrains\PhpStorm\NoReturn;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 
 class NamesController extends Controller
 {
-    #[NoReturn] public function index(): void
+    public function index(): Factory|View|Application
     {
-        $names = Name::namesOnChar('И')->get();
-        dd($names);
+        $names = Name::get();
+        return view('names', compact('names'));
+
+//        $names = Name::namesOnChar('И')->get();
+//        dd($names);
 
 //        $names = Name::namesOnCharP()->get();
 //        dd($names);
@@ -44,8 +50,10 @@ class NamesController extends Controller
 
     #[NoReturn] public function show($id): void
     {
-        $name = Name::findOrFail($id);
-        dd($name);
+        $name = Name::find($id);
+        dd($name->fullName);
+//        $name = Name::findOrFail($id);
+//        dd($name);
     }
 
     public function createNew(): void
