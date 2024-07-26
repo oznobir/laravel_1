@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Name;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use JetBrains\PhpStorm\NoReturn;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+
 
 class NamesController extends Controller
 {
@@ -56,15 +60,32 @@ class NamesController extends Controller
 //        dd($name);
     }
 
-    public function createNew(): void
+    public function create(Request $request): RedirectResponse|Redirector|Application
     {
+        Name::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name')
+        ]);
+        return redirect('/');
+
+//        Name::create($request->all());
+
+//        dump($request->input('first_name'));
+//        if (!empty($request->first_name)) {
+//            dump($request->first_name);
+//        }
+//        dump(request()->all());
+//        dump(request()->only('first_name'));
+//        dump(request()->except('last_name'));
+//        dump(request()->first_name);
+
 //        $name = new Name;
 //        $name->first_name = 'Света';
 //        $name->last_name = 'Светлова';
 //        $name->save();
 //        echo 'Добавлен(а) Света Светлова';
-        Name::create(['first_name' => 'Василий', 'last_name' => 'Васильев']);
-        echo 'Добавлен(а) Василий Васильев';
+//        Name::create(['first_name' => 'Василий', 'last_name' => 'Васильев']);
+//        echo 'Добавлен(а) Василий Васильев';
     }
 
     public function update($id): void
@@ -73,6 +94,7 @@ class NamesController extends Controller
 //        $name->last_name = 'Новик';
 //        $name->save();
 //        echo 'Изменена фамилия на Новик';
+
         $name = Name::find($id)->update(['last_name' => 'Вовик']);
         dump($name);
         echo 'Изменена фамилия на Вовик';

@@ -1,7 +1,7 @@
 <div id="docs-card"
      class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
     <a href="/" class="relative flex items-center gap-6 lg:items-end">
-        <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
+        <div id="docs-card-content" class="flex items-center gap-6 lg:flex-row">
             <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                 <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none"
                      viewBox="0 0 24 24">
@@ -15,15 +15,16 @@
             <div class="pt-3 sm:pt-5 lg:pt-0">
                 <h2 class="text-xl font-semibold text-black dark:text-white">Главная</h2>
             </div>
+            <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
+            </svg>
         </div>
-        <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
-             viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
-        </svg>
+
     </a>
     <a href="/names" class="relative flex items-center gap-6 lg:items-end">
-        <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
+        <div id="docs-card-content" class="flex items-center gap-6 lg:flex-row">
             <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                 <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <g fill="#FF2D20">
@@ -37,15 +38,33 @@
             <div class="pt-3 sm:pt-5 lg:pt-0">
                 <h2 class="text-xl font-semibold text-black dark:text-white">Имена наших юзеров</h2>
             </div>
+            <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
+            </svg>
         </div>
-        <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
-             viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
-        </svg>
+
+    </a>
+    <a href="/names/new" class="relative flex items-center gap-6 lg:items-end">
+        <div id="docs-card-content" class="flex items-center gap-6 lg:flex-row">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
+                new
+            </div>
+
+            <div class="pt-3 sm:pt-5 lg:pt-0">
+                <h2 class="text-xl font-semibold text-black dark:text-white">Добавить юзера</h2>
+            </div>
+            <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
+            </svg>
+        </div>
+
     </a>
     <a href="/posts" class="relative flex items-center gap-6 lg:items-end">
-        <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
+        <div id="docs-card-content" class="flex items-center gap-6 lg:flex-row">
             <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                 <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <g fill="#FF2D20">
@@ -59,11 +78,29 @@
             <div class="pt-3 sm:pt-5 lg:pt-0">
                 <h2 class="text-xl font-semibold text-black dark:text-white">Посты наших юзеров</h2>
             </div>
+            <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
+            </svg>
         </div>
-        <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
-             viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
-        </svg>
+
+    </a>
+    <a href="/posts/new" class="relative flex items-center gap-6 lg:items-end">
+        <div id="docs-card-content" class="flex items-center gap-6 lg:flex-row">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
+                new
+            </div>
+
+            <div class="pt-3 sm:pt-5 lg:pt-0">
+                <h2 class="text-xl font-semibold text-black dark:text-white">Добавить пост</h2>
+            </div>
+            <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
+            </svg>
+        </div>
+
     </a>
 </div>
