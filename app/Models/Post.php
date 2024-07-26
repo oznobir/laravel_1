@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static latest()
  * @method static max(string $string)
  * @method static get()
- * @property mixed $id
  */
 class Post extends Model
 {
