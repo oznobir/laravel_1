@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NameRequest;
 use App\Models\Name;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use JetBrains\PhpStorm\NoReturn;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 
 
+/**
+ * @method validate(Request $request, array $array)
+ */
 class NamesController extends Controller
 {
     public function index(): Factory|View|Application
@@ -52,16 +55,23 @@ class NamesController extends Controller
 //        dd($names);
     }
 
-    #[NoReturn] public function show($id): void
+    public function show($id): Factory|View|Application
     {
         $name = Name::find($id);
-        dd($name->fullName);
+        return view('name', compact('name'));
+
+
 //        $name = Name::findOrFail($id);
+//        dump($name->fullName);
 //        dd($name);
     }
 
-    public function create(Request $request): RedirectResponse|Redirector|Application
+    public function create(NameRequest $request): RedirectResponse|Redirector|Application
     {
+//        $validated = $request->validate([
+//            'first_name' => 'required',
+//            'last_name' => 'required',
+//        ]);
         Name::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name')
@@ -100,14 +110,17 @@ class NamesController extends Controller
         echo 'Изменена фамилия на Вовик';
     }
 
-    public function delete($id): void
+    public function delete($id): Application|Redirector|RedirectResponse
     {
+        Name::destroy($id);
+        return redirect('/names');
+
 //        Name::find($id)->delete();
 //        echo 'Удалена запись с id ' . $id;
 
-        Name::destroy($id);
-        $name = Name::find($id);
-        dump($name);
-        echo 'Удалена запись с id ' . $id;
+//        Name::destroy($id);
+//        $name = Name::find($id);
+//        dump($name);
+//        echo 'Удалена запись с id ' . $id;
     }
 }

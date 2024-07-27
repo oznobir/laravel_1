@@ -16,11 +16,13 @@ Route::post('/names/create', [NamesController::class, 'create']);
 Route::view('names/new', 'post.name');
 
 Route::get('/posts', [PostsController::class, 'index']);
+Route::get('/posts/delete/{id}', [PostsController::class, 'delete'])->whereNumber('id');
 Route::get('/posts/delete/last', [PostsController::class, 'deleteLast']);
 
 Route::post('/posts/create', [PostsController::class, 'create']);
+Route::view('posts/new', 'post.post');
 
-Route::get('/user/{id}', function ($userId) {
-    echo 'id пользователя - ' . $userId;
-});
+//Route::get('/user/{id}', function ($userId) {
+//    echo 'id пользователя - ' . $userId;
+//});
 
