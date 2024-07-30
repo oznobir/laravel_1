@@ -68,10 +68,6 @@ class NamesController extends Controller
 
     public function create(NameRequest $request): RedirectResponse|Redirector|Application
     {
-//        $validated = $request->validate([
-//            'first_name' => 'required',
-//            'last_name' => 'required',
-//        ]);
         Name::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name')
