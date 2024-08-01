@@ -17,10 +17,13 @@ use Illuminate\Foundation\Application;
  */
 class NamesController extends Controller
 {
-    public function index(): Factory|View|Application
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): View
     {
         $names = Name::get();
-        return view('names', compact('names'));
+        return view('names.index', compact('names'));
 
 //        $names = Name::namesOnChar('И')->get();
 //        dd($names);
@@ -55,24 +58,16 @@ class NamesController extends Controller
 //        dd($names);
     }
 
-    public function show($id): Factory|View|Application
-    {
-        $name = Name::find($id);
-        return view('name', compact('name'));
-
-
-//        $name = Name::findOrFail($id);
-//        dump($name->fullName);
-//        dd($name);
-    }
-
-    public function create(NameRequest $request): RedirectResponse|Redirector|Application
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function store(NameRequest $request): Application|Redirector|RedirectResponse
     {
         Name::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name')
         ]);
-        return redirect('/');
+        return redirect(route('names.index'));
 
 //        Name::create($request->all());
 
@@ -94,6 +89,38 @@ class NamesController extends Controller
 //        echo 'Добавлен(а) Василий Васильев';
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function create (): Factory|View|Application
+    {
+        return view('names.store-form');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id): Factory|View|Application
+    {
+        $name = Name::find($id);
+        return view('names.store-form', compact('name'));
+
+//        $name = Name::findOrFail($id);
+//        dump($name->fullName);
+//        dd($name);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Name $name)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
     public function update($id): void
     {
 //        $name = Name::find($id);
@@ -106,10 +133,13 @@ class NamesController extends Controller
         echo 'Изменена фамилия на Вовик';
     }
 
-    public function delete($id): Application|Redirector|RedirectResponse
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id): Application|Redirector|RedirectResponse
     {
         Name::destroy($id);
-        return redirect('/names');
+        return redirect('names.index');
 
 //        Name::find($id)->delete();
 //        echo 'Удалена запись с id ' . $id;
@@ -119,4 +149,5 @@ class NamesController extends Controller
 //        dump($name);
 //        echo 'Удалена запись с id ' . $id;
     }
+
 }

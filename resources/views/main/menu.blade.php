@@ -46,7 +46,7 @@
         </div>
 
     </a>
-    <a href="/names/new" class="relative flex items-center gap-6 lg:items-end">
+    <a href="/names/create" class="relative flex items-center gap-6 lg:items-end">
         <div id="docs-card-content" class="flex items-center gap-6 lg:flex-row">
             <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                 new
@@ -86,7 +86,7 @@
         </div>
 
     </a>
-    <a href="/posts/new" class="relative flex items-center gap-6 lg:items-end">
+    <a href="/posts/create" class="relative flex items-center gap-6 lg:items-end">
         <div id="docs-card-content" class="flex items-center gap-6 lg:flex-row">
             <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                 new
