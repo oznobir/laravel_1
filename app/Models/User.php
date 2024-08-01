@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @method static whereNot(string $string, mixed $user_id)
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -48,6 +51,7 @@ class User extends Authenticatable
 
     /**
      * @return HasMany
+     * @uses chirps
      */
     public function chirps(): HasMany
     {
