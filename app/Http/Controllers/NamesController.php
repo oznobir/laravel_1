@@ -5,16 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NameRequest;
 use App\Models\Name;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 
-
-/**
- * @method validate(Request $request, array $array)
- */
 class NamesController extends Controller
 {
     /**
@@ -91,19 +86,22 @@ class NamesController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @return Factory|View|Application
      */
     public function create (): Factory|View|Application
     {
-        return view('names.store-form');
+        return view('names.create-form');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id): Factory|View|Application
+    public function show(Name $name): Factory|View|Application
     {
-        $name = Name::find($id);
-        return view('names.store-form', compact('name'));
+        return view('names.edit-form', [
+            'name' => $name,
+        ]);
 
 //        $name = Name::findOrFail($id);
 //        dump($name->fullName);
@@ -112,34 +110,46 @@ class NamesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param Name $name
+     * @return Factory|View|Application
      */
-    public function edit(Name $name)
+    public function edit(Name $name): Factory|View|Application
     {
-        //
+        return view('names.edit-form', [
+            'name' => $name,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param NameRequest $request
+     * @param Name $name
+     * @return Application|Redirector|RedirectResponse
      */
-    public function update($id): void
+    public function update(NameRequest $request, Name $name): Application|Redirector|RedirectResponse
     {
+        $name->update($request->validated());
+        return redirect(route('names.index'));
+
 //        $name = Name::find($id);
 //        $name->last_name = 'Новик';
 //        $name->save();
 //        echo 'Изменена фамилия на Новик';
 
-        $name = Name::find($id)->update(['last_name' => 'Вовик']);
-        dump($name);
-        echo 'Изменена фамилия на Вовик';
+//        $name = Name::find($id)->update(['last_name' => 'Вовик']);
+//        dump($name);
+//        echo 'Изменена фамилия на Вовик';
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id): Application|Redirector|RedirectResponse
+    public function destroy(Name $name): Application|Redirector|RedirectResponse
     {
-        Name::destroy($id);
-        return redirect('names.index');
+        Name::destroy($name);
+        return redirect(route('names.index'));
 
 //        Name::find($id)->delete();
 //        echo 'Удалена запись с id ' . $id;

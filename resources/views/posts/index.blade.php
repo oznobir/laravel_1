@@ -24,7 +24,7 @@
                                 Изменить
                             </div>
                         </a>
-                        <a href="#" class="relative flex items-center gap-6 lg:items-end">
+                        <div class="relative flex items-center gap-6 lg:items-end">
                             <div class="flex items-center gap-6 lg:flex-row">
                                 <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                                     <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -36,9 +36,16 @@
                                         </g>
                                     </svg>
                                 </div>
-                                Удалить
+                                <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <a href="{{route('posts.destroy', $post->id)}}"
+                                       onclick="event.preventDefault(); this.closest('form').submit();">
+                                        Удалить
+                                    </a>
+                                </form>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
 

@@ -55,7 +55,8 @@ class PostsController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        Validator::make($request->all(), [
+
+        $data = Validator::make($request->all(), [
             'title' => 'required|between:2,150',
             'description' => 'required|between:2,255',
         ], [
@@ -65,6 +66,8 @@ class PostsController extends Controller
             'title' => 'Заголовок поста',
             'description' => 'Текст поста',
         ])->validate();
+
+        Post::create($data);
         return redirect(route('posts.index'));
 //        Post::create(['title' => 'test', 'description' => 'some text']);
 //        echo 'Новый пост создан';

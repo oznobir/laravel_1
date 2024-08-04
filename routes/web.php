@@ -33,7 +33,7 @@ Route::resource('posts', PostsController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('names', NamesController::class)
-    ->except(['edit'])
+//    ->except(['edit'])
     ->middleware(['auth', 'verified']);
 
 //Route::get('/user/{id}', function ($userId) {
