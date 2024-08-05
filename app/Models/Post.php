@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static create(string[] $array)
@@ -19,7 +20,7 @@ class Post extends Model
     use HasFactory;
 
     protected $guarded = [];
-//    protected array $dates = ['created_at', 'updated_at', 'expired_at']; // удалено
+
     protected $casts = [
         'expired_at' => 'datetime',
     ];
@@ -34,5 +35,13 @@ class Post extends Model
         return Attribute::make(
             set: fn(string $value) => 'Пост ' . $id . ': ' . $value
         );
+    }
+    /**
+     * @return HasMany
+     * @uses chirps
+     */
+    public function chirps(): HasMany
+    {
+        return $this->hasMany(Chirp::class);
     }
 }

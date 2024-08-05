@@ -26,8 +26,13 @@ class Name extends Model
 {
     use HasFactory;
 
-//    protected $fillable = ['first_name', 'last_name'];
-    protected $guarded = [];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'type',
+        'password',
+    ];
+//    protected $guarded = [];
 
     /**
      * @param Builder $query
