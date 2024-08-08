@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         for ($i = 1; $i < 11; $i++) {
             User::factory()->create([
-                'name' => 'r' . $i,
+                'name' => 'user' . $i,
                 'email' => 'r' . $i . '@m.ru',
                 'password' => bcrypt('12345678'),
             ]);

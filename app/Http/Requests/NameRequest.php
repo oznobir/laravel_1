@@ -5,6 +5,11 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $first_name
+ * @property mixed $last_name
+ * @property mixed $type
+ */
 class NameRequest extends FormRequest
 {
     /**
@@ -26,6 +31,7 @@ class NameRequest extends FormRequest
         return [
             'first_name' => 'required|between:2,10',
             'last_name' => 'required|between:2,10',
+            'type' => 'required|between:2,10',
         ];
     }
 
@@ -39,6 +45,8 @@ class NameRequest extends FormRequest
             'first_name.between' => 'Поле Имя должно содержать не менее - :min и не более - :max символа(ов)',
             'last_name.required' => 'Не заполнено поле Фамилия',
             'last_name.between' => 'Поле Фамилия должно содержать не менее - :min и не более - :max символа(ов)',
+            'type.required' => 'Не заполнено поле Тип работника',
+            'type.between' => 'Поле Тип работника должно содержать не менее - :min и не более - :max символа(ов)',
         ];
     }
 }

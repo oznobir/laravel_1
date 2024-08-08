@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @method static where(string $string, string $string1, string $string2)
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed|string $first_name
  * @property mixed|string $last_name
  */
-class Name extends Model
+class Name extends Authenticatable
 {
     use HasFactory;
 

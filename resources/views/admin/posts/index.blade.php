@@ -1,15 +1,20 @@
-@extends('layouts.layout', ['head_title' => 'Посты наших юзеров'])
-@section('title', 'Посты юзеров')
-@section('content')
+<x-admin-layout>
+    <x-slot name="head_title">
+        Статьи сайта
+    </x-slot>
+    <x-slot name="title">
+        <div class="flex lg:justify-center lg:col-start-2">
+            <h1 class="text-xl font-semibold text-black dark:text-white">Статьи</h1>
+        </div>
+    </x-slot>
     <main class="mt-6">
         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-{{--            @include('main.menu')--}}
             @foreach($posts as $post)
                 <div class="flex flex-col items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                     <h2 class="text-xl font-semibold text-black dark:text-white">{{ $post->title }}</h2>
                     <div>{{ $post->description }}</div>
                     <div class="flex items-center gap-6 lg:flex-row">
-                        <a href="/posts/{{ $post->id }}" class="relative flex items-center gap-6 lg:items-end">
+                        <a href="{{ route('admin.posts.show', $post) }}" class="relative flex items-center gap-6 lg:items-end">
                             <div class="flex items-center gap-6 lg:flex-row">
                                 <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                                     <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -24,7 +29,7 @@
                                 Изменить
                             </div>
                         </a>
-                        <div class="relative flex items-center gap-6 lg:items-end">
+                        <div class="relative flex items-center gap-6 lg:items-end" role="button">
                             <div class="flex items-center gap-6 lg:flex-row">
                                 <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                                     <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -36,20 +41,16 @@
                                         </g>
                                     </svg>
                                 </div>
-                                <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+                                <form method="POST" action="{{ route('admin.posts.destroy', $post) }}">
                                     @csrf
                                     @method('delete')
-                                    <a href="{{route('posts.destroy', $post->id)}}"
-                                       onclick="event.preventDefault(); this.closest('form').submit();">
-                                        Удалить
-                                    </a>
+                                    <button type="submit">Удалить</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             @endforeach
         </div>
     </main>
-@endsection
+</x-admin-layout>

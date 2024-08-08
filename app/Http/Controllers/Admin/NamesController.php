@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\NameRequest;
 use App\Models\Name;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class NamesController extends Controller
 {
@@ -18,7 +20,7 @@ class NamesController extends Controller
     public function index(): View
     {
         $names = Name::get();
-        return view('names.index', compact('names'));
+        return view('admin.names.index', compact('names'));
 
 //        $names = Name::namesOnChar('И')->get();
 //        dd($names);
@@ -62,7 +64,7 @@ class NamesController extends Controller
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name')
         ]);
-        return redirect(route('names.index'));
+        return redirect(route('admin.names.index'));
 
 //        Name::create($request->all());
 
@@ -91,7 +93,7 @@ class NamesController extends Controller
      */
     public function create (): Factory|View|Application
     {
-        return view('names.create-form');
+        return view('admin.names.create-form');
     }
 
     /**
@@ -99,7 +101,7 @@ class NamesController extends Controller
      */
     public function show(Name $name): Factory|View|Application
     {
-        return view('names.edit-form', [
+        return view('admin.names.edit-form', [
             'name' => $name,
         ]);
 
@@ -116,7 +118,7 @@ class NamesController extends Controller
      */
     public function edit(Name $name): Factory|View|Application
     {
-        return view('names.edit-form', [
+        return view('admin.names.edit-form', [
             'name' => $name,
         ]);
     }
@@ -131,7 +133,7 @@ class NamesController extends Controller
     public function update(NameRequest $request, Name $name): Application|Redirector|RedirectResponse
     {
         $name->update($request->validated());
-        return redirect(route('names.index'));
+        return redirect(route('admin.names.index'));
 
 //        $name = Name::find($id);
 //        $name->last_name = 'Новик';
@@ -149,7 +151,7 @@ class NamesController extends Controller
     public function destroy(Name $name): Application|Redirector|RedirectResponse
     {
         Name::destroy($name);
-        return redirect(route('names.index'));
+        return redirect(route('admin.names.index'));
 
 //        Name::find($id)->delete();
 //        echo 'Удалена запись с id ' . $id;

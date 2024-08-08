@@ -23,7 +23,7 @@ class PostFactory extends Factory
             'title' => fake()->name(),
             'description' => fake()->text(),
             'preview' => fake()->text(50),
-            'thumbnail' => fake()->image('public/storage/posts', 640, 520, false),
+            'thumbnail' => fake()->image('public/storage/posts/', 320, 320, null, false),
         ];
     }
 
