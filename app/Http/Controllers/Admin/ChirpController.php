@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Chirp;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,21 +18,21 @@ class ChirpController extends Controller
      *
      * @return Factory|View|Application
      */
-//    public function index(): Factory|View|Application
-//    {
-////        return view('chirps.index');
-//        return view('chirps.index', [
-//            'chirps' => Chirp::with('user')->latest()->get(),
-//        ]);
-//    }
+    public function index(): Factory|View|Application
+    {
+//        return view('chirps.index');
+        return view('chirps.index', [
+            'chirps' => Chirp::with('user')->latest()->get(),
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
      */
-//    public function create()
-//    {
-//        //
-//    }
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.

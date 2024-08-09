@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\NameRequest;
+use App\Http\Requests\ChirpRequest;
 use App\Models\Name;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
-class NamesController extends Controller
+class NameController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -58,7 +58,7 @@ class NamesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function store(NameRequest $request): Application|Redirector|RedirectResponse
+    public function store(ChirpRequest $request): Application|Redirector|RedirectResponse
     {
         Name::create([
             'first_name' => $request->input('first_name'),
@@ -126,11 +126,11 @@ class NamesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param NameRequest $request
+     * @param ChirpRequest $request
      * @param Name $name
      * @return Application|Redirector|RedirectResponse
      */
-    public function update(NameRequest $request, Name $name): Application|Redirector|RedirectResponse
+    public function update(ChirpRequest $request, Name $name): Application|Redirector|RedirectResponse
     {
         $name->update($request->validated());
         return redirect(route('admin.names.index'));

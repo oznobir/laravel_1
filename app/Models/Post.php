@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static max(string $string)
  * @method static get()
  * @method static find($id)
+ * @method static findOrFail($id)
+ * @property mixed $id
  */
 class Post extends Model
 {

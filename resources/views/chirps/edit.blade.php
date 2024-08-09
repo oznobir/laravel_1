@@ -9,8 +9,6 @@
             >{{ old('message', $chirp->message) }}</textarea>
             <x-input-error :messages="$errors->get('message')" class="mt-2" />
             <div class="mt-4 space-x-2">
-{{--                <x-primary-button>{{ __('Save') }}</x-primary-button>--}}
-{{--                <a href="{{ route('chirps.index') }}">{{ __('Cancel') }}</a>--}}
                 <x-primary-button>Сохранить</x-primary-button>
                 <a href="{{ route('chirps.index') }}">Отмена</a>
             </div>

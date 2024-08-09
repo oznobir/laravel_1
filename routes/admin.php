@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\NamesController;
-use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\NameController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,11 +14,11 @@ Route::prefix('admin')->group(function () {
             return view('admin.index');
         })->name('index');
 
-        Route::resource('posts', PostsController::class)
+        Route::resource('posts', PostController::class)
             ->only(['index', 'show', 'create', 'store', 'destroy', 'update'])
             ->middleware(['auth:admin']);
 
-        Route::resource('names', NamesController::class)
+        Route::resource('names', NameController::class)
             ->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy'])
             ->middleware(['auth:admin']);
 

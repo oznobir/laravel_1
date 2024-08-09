@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method static whereNot(string $string, mixed $user_id)
+ * @method static create(array $array)
  */
 class User extends Authenticatable
 {

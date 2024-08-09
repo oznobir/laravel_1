@@ -29,9 +29,10 @@ class NameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|between:2,10',
-            'last_name' => 'required|between:2,10',
-            'type' => 'required|between:2,10',
+            'first_name' => 'required|string|between:2,10',
+            'last_name' => 'required|string|between:2,10',
+            'type' => 'required|string|between:2,10',
+            'password' => 'required|string',
         ];
     }
 
