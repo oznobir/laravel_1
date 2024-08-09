@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -29,26 +30,36 @@ class PostController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param Post $post
      * @return Factory|View|Application
      */
-    public function show(int $id): Factory|View|Application
+    public function show(Post $post): Factory|View|Application
     {
-        $post = Post::findOrFail($id);
+//        $post = Post::findOrFail($id);
         return view('posts.show', [
             'post' => $post
         ]);
     }
-
-    /**
-     * @param ChirpRequest $request
-     * @param int $id
-     * @return Application|Redirector|RedirectResponse
-     */
-    public function chirp(ChirpRequest $request, int $id): Application|Redirector|RedirectResponse
+    public function chirp(Post $post, Chirp $chirp): View
     {
-        $post = Post::findOrFail($id);
-        $post->chirps()->create($request->validated());
-        return redirect(route('posts.show', $id));
+        Gate::authorize('update', $chirp);
+
+        return view('chirps.edit', [
+            'chirp' => $chirp,
+            'post' => $post,
+        ]);
     }
+
+//    /**
+//     * @param ChirpRequest $request
+//     * @param int $id
+//     * @return Application|Redirector|RedirectResponse
+//     */
+//    public function chirp(ChirpRequest $request, int $id): Application|Redirector|RedirectResponse
+//    {
+//        $post = Post::findOrFail($id);
+//        $post->chirps()->create($request->validated());
+//
+//        return redirect(route('posts.show', $id));
+//    }
 }
