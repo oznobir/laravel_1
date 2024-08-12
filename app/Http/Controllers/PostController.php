@@ -24,9 +24,7 @@ class PostController extends Controller
     public function index(): Factory|View|Application
     {
         $posts =  Post::query()->orderBy('created_at', 'DESC')->paginate(3);
-        return view('posts.index', [
-            'posts' => $posts
-        ]);
+        return view('posts.index',compact('posts'));
     }
 
     /**
@@ -35,31 +33,13 @@ class PostController extends Controller
      */
     public function show(Post $post): Factory|View|Application
     {
-//        $post = Post::findOrFail($id);
-        return view('posts.show', [
-            'post' => $post
-        ]);
+        $chirps = $post->chirps()->latest()->get();
+        return view('posts.show', compact('post', 'chirps'));
     }
     public function chirp(Post $post, Chirp $chirp): View
     {
         Gate::authorize('update', $chirp);
 
-        return view('chirps.edit', [
-            'chirp' => $chirp,
-            'post' => $post,
-        ]);
+        return view('chirps.edit', compact('post', 'chirp'));
     }
-
-//    /**
-//     * @param ChirpRequest $request
-//     * @param int $id
-//     * @return Application|Redirector|RedirectResponse
-//     */
-//    public function chirp(ChirpRequest $request, int $id): Application|Redirector|RedirectResponse
-//    {
-//        $post = Post::findOrFail($id);
-//        $post->chirps()->create($request->validated());
-//
-//        return redirect(route('posts.show', $id));
-//    }
 }

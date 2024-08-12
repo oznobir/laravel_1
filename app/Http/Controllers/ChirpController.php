@@ -16,11 +16,10 @@ class ChirpController extends Controller
     public function store(ChirpRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-
         $post = Post::findOrFail($validated['post_id']);
-        $post->chirps()->create($validated);
+        Chirp::create($validated);
 
-        return redirect(route('posts.show', $post));
+        return redirect(route('posts.show', compact('post')));
     }
 
 
@@ -29,14 +28,14 @@ class ChirpController extends Controller
      */
     public function update(ChirpRequest $request, Chirp $chirp): RedirectResponse
     {
-//        Gate::authorize('update', $chirp);
-//        dd($request);
-        $validated = $request->validated();
-//        dd($validated);
-        $post = Post::findOrFail($validated['post_id']);
-        $chirp->update($validated['message']);
+        Gate::authorize('update', $chirp);
 
-        return redirect(route('posts.show', $post));
+        $validated = $request->validated();
+
+        $post = Post::findOrFail($validated['post_id']);
+        $chirp->update($validated);
+
+        return redirect(route('posts.show', compact('post')));
     }
 
     /**
@@ -46,9 +45,10 @@ class ChirpController extends Controller
     {
         Gate::authorize('delete', $chirp);
 
-        $id = $request->input('post_id')->validated();
-        $post = Post::findOrFail($id);
+        $validated = $request->validated();
+
+        $post = Post::findOrFail($validated('post_id'));
         $chirp->delete();
-        return redirect(route('posts.show', $post));
+        return redirect(route('posts.show', compact('post')));
     }
 }

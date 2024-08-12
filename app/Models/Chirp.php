@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $user
  * @property mixed $message
  * @property mixed $user_id
+ * @method static create(mixed $validated)
  */
 class Chirp extends Model
 {
