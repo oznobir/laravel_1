@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+
 class NewPasswordController extends Controller
 {
     /**
@@ -27,7 +28,9 @@ class NewPasswordController extends Controller
      * Handle an incoming new password request.
      *
      * @throws ValidationException
+     * @noinspection PhpUndefinedFieldInspection
      */
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -43,7 +46,7 @@ class NewPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
                 $user->forceFill([
-                    'password' => Hash::make($request->input('password')),
+                    'password' => Hash::make($request->password),
                     'remember_token' => Str::random(60),
                 ])->save();
 

@@ -30,7 +30,6 @@ class ChirpRequest extends FormRequest
     {
         return [
             'message' => 'required|string|between:2,255',
-            'post_id' => 'required|exists:posts,id',
             'user_id' => 'required|exists:users,id',
         ];
     }
@@ -44,7 +43,6 @@ class ChirpRequest extends FormRequest
             'message.required' => 'Текст комментария пустой',
             'message.string' => 'Напишите текст в комментарии',
             'message.between' => 'Текст комментария должен содержать не менее - :min и не более - :max символа(ов)',
-            'post_id' => 'Ошибка данных',
             'user_id' => 'Ошибка данных',
         ];
     }

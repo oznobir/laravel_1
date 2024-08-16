@@ -17,7 +17,7 @@
                             <div class="flex items-center gap-6 lg:flex-row">
                                 <img src="{{ url('storage/posts/' . $post->thumbnail) }}" alt="img">
                                 <div>{!! $post->preview !!}</div>
-                                <a href="/posts/{{ $post->id }}" class="relative flex items-center gap-6 lg:items-end">
+                                <a href="{{ route('posts.show', $post) }}" class="relative flex items-center gap-6 lg:items-end">
                                     <div class="flex items-center gap-6 lg:flex-row">
                                         <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 sm:size-16">
                                             <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none"

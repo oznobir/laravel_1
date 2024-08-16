@@ -21,12 +21,11 @@
                 </div>
             </div>
             <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-                <form method="POST" action="{{ route('chirps.store') }}">
+                <form method="POST" action="{{ route('posts.chirps.store', $post) }}">
                     @csrf
-                    <textarea
-                            name="message"
-                            placeholder="Ваш комментарий ..."
-                            class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                    <textarea name="message"
+                              placeholder="Ваш комментарий ..."
+                              class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                     >{{ old('message') }}</textarea>
                     <x-input-error :messages="$errors->get('message')" class="mt-2"/>
                     <x-hidden-input :value="$post->id" name="post_id"/>
@@ -48,7 +47,7 @@
                                         <small class="ml-2 text-sm text-gray-600">{{ $chirp->created_at->format('j M Y, g:i a') }}</small>
                                         @unless ($chirp->created_at->eq($chirp->updated_at))
                                             <small class="text-sm text-gray-600">
-                                                &middot;Редактировать
+                                                &middot;Изменено {{ $chirp->updated_at }}
                                             </small>
                                         @endunless
                                     </div>
@@ -64,14 +63,13 @@
                                                 </button>
                                             </x-slot>
                                             <x-slot name="content">
-                                                <x-dropdown-link :href="route('posts.chirp', [$post, $chirp])">
+                                                <x-dropdown-link :href="route('posts.chirps.show', [$post, $chirp])">
                                                     Изменить
                                                 </x-dropdown-link>
-                                                <form method="POST" action="{{ route('chirps.destroy', $chirp) }}">
+                                                <form method="POST" action="{{ route('posts.chirps.destroy', [$post, $chirp]) }}">
                                                     @csrf
                                                     @method('delete')
-                                                    <x-hidden-input :value="$post->id" name="post_id"/>
-                                                    <x-dropdown-link :href="route('chirps.destroy', $chirp)"
+                                                    <x-dropdown-link :href="route('posts.chirps.destroy', [$post, $chirp])"
                                                                      onclick="event.preventDefault(); this.closest('form').submit();">
                                                         Удалить
                                                     </x-dropdown-link>

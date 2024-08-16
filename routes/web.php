@@ -10,14 +10,17 @@ Route::get('/', [IndexController::class, 'index'])
     ->name('dashboard');
 Route::get('/posts', [PostController::class, 'index'])
     ->name('posts.index');
-Route::get('/posts/{post}', [PostController::class, 'show'])
-//    ->whereNumber('id')
-    ->name('posts.show');
 
-Route::get('posts/{post}/chirp/{chirp}', [PostController::class, 'chirp'])
-//    ->whereNumber(['post', 'chirp'])
-    ->name('posts.chirp')
-    ->middleware(['auth', 'verified']);
+Route::group([
+    'prefix' => '/posts/{post}',
+    'as' => 'posts.',
+], function () {
+    Route::get('/', [PostController::class, 'show'])
+        ->name('show');
+    Route::resource('chirps', ChirpController::class)
+        ->only(['store', 'show', 'update', 'destroy'])
+        ->middleware(['auth', 'verified']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])
@@ -27,9 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 });
-Route::resource('chirps', ChirpController::class)
-    ->only(['store', 'update', 'destroy'])
-    ->middleware(['auth', 'verified']);
+
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

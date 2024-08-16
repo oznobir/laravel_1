@@ -36,10 +36,4 @@ class PostController extends Controller
         $chirps = $post->chirps()->latest()->get();
         return view('posts.show', compact('post', 'chirps'));
     }
-    public function chirp(Post $post, Chirp $chirp): View
-    {
-        Gate::authorize('update', $chirp);
-
-        return view('chirps.edit', compact('post', 'chirp'));
-    }
 }
