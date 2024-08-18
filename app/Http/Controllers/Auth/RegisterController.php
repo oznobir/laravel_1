@@ -13,7 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display the registration view.

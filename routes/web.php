@@ -11,16 +11,14 @@ Route::get('/', [IndexController::class, 'index'])
 Route::get('/posts', [PostController::class, 'index'])
     ->name('posts.index');
 
-Route::group([
-    'prefix' => '/posts/{post}',
-    'as' => 'posts.',
-], function () {
+Route::prefix('/posts/{post}')->group(function () {
     Route::get('/', [PostController::class, 'show'])
-        ->name('show');
+        ->name('posts.show');
     Route::resource('chirps', ChirpController::class)
         ->only(['store', 'show', 'update', 'destroy'])
         ->middleware(['auth', 'verified']);
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])

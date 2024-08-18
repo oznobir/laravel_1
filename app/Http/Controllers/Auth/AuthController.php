@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-class AuthenticatedSessionController extends Controller
+class AuthController extends Controller
 {
     /**
      * Display the login view.
