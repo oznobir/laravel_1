@@ -136,7 +136,7 @@ return [
     'prohibited_unless' => 'Значение поля :attribute запрещено, если :other не состоит в :values.',
     'prohibits' => 'Значение поля :attribute запрещает присутствие :other.',
     'regex' => 'Значение поля :attribute имеет некорректный формат.',
-   // 'relatable' => 'Значение поля :attribute не может быть связано с этим ресурсом.',
+    // 'relatable' => 'Значение поля :attribute не может быть связано с этим ресурсом.',
     'required' => 'Поле :attribute обязательно для заполнения.',
     'required_array_keys' => 'Массив, указанный в поле :attribute, обязательно должен иметь ключи: :values',
     'required_if' => 'Поле :attribute обязательно для заполнения, когда :other содержит :value.',
@@ -194,6 +194,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => 'Пароль',
+        'email' => 'Адрес электронной почты',
+        'name' => 'Имя',
+        'message' => 'Комментарий',
+        'current_password' => 'Текущий пароль',
+    ],
 
 ];
