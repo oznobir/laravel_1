@@ -1,23 +1,50 @@
 <x-guest-layout>
+    <x-slot name="head_title">
+        {{ __('Log in') }}
+    </x-slot>
     <!-- Session Status -->
-{{--    <x-auth-session-status class="mb-4" :status="session('status')" />--}}
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('admin.login_post') }}">
+    <form method="POST" action="{{ route('admin.login') }}">
         @csrf
-
         <!-- first_name -->
         <div>
             <x-input-label for="first_name" :value="'Ваше имя'" />
-            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+            <x-text-input id="first_name"
+                          class="block mt-1 w-full"
+                          type="text"
+                          name="first_name"
+                          :value="old('first_name')"
+                          required autofocus
+                          autocomplete="username" />
+            <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
+
         </div>
         <!-- last_name -->
         <div>
-            <x-input-label for="last_name" :value="'Ваше фамилия'" />
-            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="username" />
+            <x-input-label for="last_name" :value="'Ваша фамилия'"/>
+            <x-text-input id="last_name"
+                          class="block mt-1 w-full"
+                          type="text" name="last_name"
+                          :value="old('last_name')"
+                          required autofocus
+                          autocomplete="username" />
             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
         </div>
-
+        <!-- type -->
+        <div>
+            <x-input-label for="type" :value="'Тип'"/>
+            <x-text-input
+                    id="type"
+                    class="block mt-1 w-full"
+                    type="text"
+                    name="type"
+                    :value="old('type')"
+                    required autofocus
+{{--                    autocomplete="username"--}}
+            />
+            <x-input-error :messages="$errors->get('type')" class="mt-2"/>
+        </div>
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="'Пароль'" />

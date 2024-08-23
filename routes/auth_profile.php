@@ -10,7 +10,7 @@ use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Profile\UpdatePasswordController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
+Route::middleware('guest:web')->group(function () {
     Route::get('register', [RegisterController::class, 'create'])
         ->name('register');
 
@@ -20,7 +20,6 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 
     Route::post('login', [AuthController::class, 'store']);
-
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -35,7 +34,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
@@ -52,7 +51,7 @@ Route::middleware('auth')->group(function () {
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
 
-    Route::post('email/verification-notification', [VerifyEmailController::class, 'send'])
+    Route::post('verify-email/notification', [VerifyEmailController::class, 'send'])
         ->middleware('throttle:6,1')
         ->name('verification.send');
 

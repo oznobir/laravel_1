@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="head_title">
+        {{ $post->title }}
+    </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ $post->title }}
@@ -9,12 +12,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded-lg shadow-2xl">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div>
+                    <div class="flex p-6 ">
                         <img src="{{ url('storage/posts/' . $post->thumbnail) }}" alt="img">
+                        <div class="font-bold text-2xl text-gray-800 dark:text-gray-100">{!! $post->preview !!}</div>
                     </div>
-                    <div class="px-4 py-2 mt-2 bg-white dark:bg-gray-900">
-                        <h2 class="font-bold text-2xl text-gray-800 dark:text-gray-100">{!! $post->preview !!}</h2>
-                        <p class="sm:text-sm text-xs text-gray-700 px-2 mr-1 my-3">
+                    <div class="px-4 py-2 mt-2 bg-white dark:bg-gray-600">
+                        <p class="sm:text-sm text-xl text-gray-700 px-2 mr-1 my-3">
                             {!! $post->description !!}
                         </p>
                     </div>

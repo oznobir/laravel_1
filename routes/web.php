@@ -15,8 +15,7 @@ Route::prefix('/posts/{post}')->group(function () {
         ->name('posts.show');
     Route::resource('chirps', ChirpController::class)
         ->only(['store', 'show', 'update', 'destroy'])
-        ->middleware(['auth', 'verified']);
+        ->middleware(['auth:web', 'verified']);
 });
 
 require __DIR__ . '/auth_profile.php';
-require __DIR__ . '/admin.php';

@@ -42,19 +42,19 @@ class Name extends Authenticatable
     public function scopeNamesOnCharP(Builder $query): Builder
     {
         return $query
-            ->where('first_name', 'LIKE', 'П%')
+            ->where('first_name', 'LIKE', 'R%')
             ->orWhere('last_name', 'LIKE', 'П%');
     }
 
     /**
      * @param Builder $query
      * @param string $char
-     * @return Builder
+
      * @uses scopeNamesOnChar
      */
-    public function scopeNamesOnChar(Builder $query, string $char): Builder
+    public function scopeNamesOnChar(Builder $query, string $char): void
     {
-        return $query
+       $query
             ->where('first_name', 'LIKE', $char . '%')
             ->orWhere('last_name', 'LIKE', $char . '%');
     }

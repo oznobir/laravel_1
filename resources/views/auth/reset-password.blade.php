@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <x-slot name="head_title">
+        {{ __('Reset Password') }}
+    </x-slot>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
@@ -32,8 +35,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                Сброс пароля
-{{--                {{ __('Reset Password') }}--}}
+                {{ __('Reset Password') }}
             </x-primary-button>
         </div>
     </form>
