@@ -10,7 +10,7 @@ use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Profile\UpdatePasswordController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest:web')->group(function () {
+Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'create'])
         ->name('register');
 

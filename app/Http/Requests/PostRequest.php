@@ -10,7 +10,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property mixed $last_name
  * @property mixed $type
  */
-class NameRequest extends FormRequest
+class PostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,10 @@ class NameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|between:2,10',
-            'last_name' => 'required|string|between:2,10',
-            'password' => 'required|string|min:8',
+            'title' => 'required|string|between:2, 60',
+            'preview' => 'required|string|between:2,450',
+            'description' => 'required|string|between:2,950',
+            'thumbnail' => 'image',
         ];
     }
 

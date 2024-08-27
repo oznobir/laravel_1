@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChirpRequest;
-use App\Models\Chirp;
 use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
-
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -23,7 +14,9 @@ class PostController extends Controller
      */
     public function index(): Factory|View|Application
     {
-        $posts =  Post::query()->orderBy('created_at', 'DESC')->paginate(3);
+        $posts =  Post::query()
+            ->orderByDesc('created_at')
+            ->paginate(3);
         return view('posts.index',compact('posts'));
     }
 

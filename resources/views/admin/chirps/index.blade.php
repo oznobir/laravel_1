@@ -1,13 +1,13 @@
 <x-admin-layout>
     <x-slot name="head_title">
-        {{ __('Posts') }}
+        {{ __('Chirps') }}
     </x-slot>
 
     <div class="container mx-auto px-6 py-8">
-        <h3 class="text-gray-700 text-3xl font-medium">{{ __('Posts') }}</h3>
+        <h3 class="text-gray-700 text-3xl font-medium">{{ __('Chirps') }}</h3>
 
         <div class="mt-8">
-            <a href="{{ route('admin.posts.create') }}"
+            <a href="{{ route('admin.chirps.create') }}"
                class="text-indigo-600 hover:text-indigo-900"
             >{{ __('Add') }}</a>
         </div>
@@ -23,27 +23,34 @@
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                         </tr>
                         </thead>
 
                         <tbody class="bg-white">
-                        @foreach($posts as $post)
+                        @foreach($chirps as $chirp)
                             <tr>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    <div class="text-sm leading-5 text-gray-900">{{ $post->title }}</div>
+                                    <div class="text-sm leading-5 text-gray-900">{{ $chirp->message }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
 
-                                    <a href=""
+                                    <a href="{{ route('admin.posts.edit', $chirp->post) }}"
                                        class="text-indigo-600 hover:text-indigo-900"
-                                    >{{ __('Chirps') }}</a>
+                                    >{{ $chirp->post->title }}</a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
 
-                                    <a href="{{ route('admin.posts.edit', $post) }}"
+                                    <a href="{{ route('admin.users.show', $chirp->user) }}"
+                                       class="text-indigo-600 hover:text-indigo-900"
+                                    >{{ $chirp->user->name }}</a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+
+                                    <a href="{{ route('admin.chirps.edit', $chirp) }}"
                                        class="text-indigo-600 hover:text-indigo-900"
                                     >{{ __('Edit') }}</a>
-                                    <form action="{{ route('admin.posts.destroy', $post) }}"
+                                    <form action="{{ route('admin.chirps.destroy', $chirp) }}"
                                           method="post"
                                     >
                                         @csrf
@@ -61,7 +68,7 @@
             </div>
         </div>
         <div class="flex flex-col mt-8">
-            {{ $posts->links() }}
+            {{ $chirps->links() }}
         </div>
     </div>
 </x-admin-layout>

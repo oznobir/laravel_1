@@ -2,25 +2,44 @@
 
 namespace App\Models;
 
+use Database\Factories\NameFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Carbon;
+
 
 /**
- * @method static where(string $string, string $string1, string $string2)
- * @method static whereIn(string $string, int[] $array)
- * @method static find(int $int)
- * @method static findOrFail($id)
- * @method static firstOrFail($id)
- * @method static orderBy(string $string, string $string1)
- * @method static orderByDesc(string $string)
- * @method static create(string[] $array)
- * @method static namesOnCharP()
- * @method static namesOnChar(string $string)
+ * 
+ *
+ * @property mixed $last_name
+ * @property mixed $first_name
  * @method static get()
- * @property mixed|string $first_name
- * @property mixed|string $last_name
+ * @method static create(array $array)
+ * @property int $id
+ * @property string $type
+ * @property string $password
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read mixed $full_name
+ * @method static NameFactory factory($count = null, $state = [])
+ * @method static Builder|Name namesOnChar(string $char)
+ * @method static Builder|Name namesOnCharP()
+ * @method static Builder|Name newModelQuery()
+ * @method static Builder|Name newQuery()
+ * @method static Builder|Name query()
+ * @method static Builder|Name whereCreatedAt($value)
+ * @method static Builder|Name whereFirstName($value)
+ * @method static Builder|Name whereId($value)
+ * @method static Builder|Name whereLastName($value)
+ * @method static Builder|Name wherePassword($value)
+ * @method static Builder|Name whereRememberToken($value)
+ * @method static Builder|Name whereType($value)
+ * @method static Builder|Name whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class Name extends Authenticatable
 {
@@ -42,8 +61,8 @@ class Name extends Authenticatable
     public function scopeNamesOnCharP(Builder $query): Builder
     {
         return $query
-            ->where('first_name', 'LIKE', 'R%')
-            ->orWhere('last_name', 'LIKE', 'П%');
+            ->where($this->fillable[0], 'LIKE', 'R%')
+            ->orWhere($this->fillable[1], 'LIKE', 'П%');
     }
 
     /**
@@ -55,8 +74,8 @@ class Name extends Authenticatable
     public function scopeNamesOnChar(Builder $query, string $char): void
     {
        $query
-            ->where('first_name', 'LIKE', $char . '%')
-            ->orWhere('last_name', 'LIKE', $char . '%');
+            ->where($this->fillable[0], 'LIKE', $char . '%')
+            ->orWhere($this->fillable[1], 'LIKE', $char . '%');
     }
 
     /**

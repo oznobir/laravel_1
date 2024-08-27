@@ -1,13 +1,13 @@
 <x-admin-layout>
     <x-slot name="head_title">
-        {{ __('Posts') }}
+        {{ __('Users') }}
     </x-slot>
 
     <div class="container mx-auto px-6 py-8">
-        <h3 class="text-gray-700 text-3xl font-medium">{{ __('Posts') }}</h3>
+        <h3 class="text-gray-700 text-3xl font-medium">{{ __('Users') }}</h3>
 
         <div class="mt-8">
-            <a href="{{ route('admin.posts.create') }}"
+            <a href="{{ route('admin.users.create') }}"
                class="text-indigo-600 hover:text-indigo-900"
             >{{ __('Add') }}</a>
         </div>
@@ -23,14 +23,18 @@
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                         </tr>
                         </thead>
 
                         <tbody class="bg-white">
-                        @foreach($posts as $post)
+                        @foreach($users as $user)
                             <tr>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    <div class="text-sm leading-5 text-gray-900">{{ $post->title }}</div>
+                                    <div class="text-sm leading-5 text-gray-900">{{ $user->name }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div class="text-sm leading-5 text-gray-900">{{ $user->email }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
 
@@ -40,10 +44,10 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
 
-                                    <a href="{{ route('admin.posts.edit', $post) }}"
+                                    <a href="{{ route('admin.users.show', $user) }}"
                                        class="text-indigo-600 hover:text-indigo-900"
-                                    >{{ __('Edit') }}</a>
-                                    <form action="{{ route('admin.posts.destroy', $post) }}"
+                                    >{{ __('Show') }}</a>
+                                    <form action="{{ route('admin.users.destroy', $user) }}"
                                           method="post"
                                     >
                                         @csrf
@@ -61,7 +65,7 @@
             </div>
         </div>
         <div class="flex flex-col mt-8">
-            {{ $posts->links() }}
+            {{ $users->links() }}
         </div>
     </div>
 </x-admin-layout>

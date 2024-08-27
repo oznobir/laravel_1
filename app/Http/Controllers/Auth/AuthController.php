@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\UserLoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class AuthController extends Controller
      * Handle an incoming authentication request.
      * @throws ValidationException
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(UserLoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 

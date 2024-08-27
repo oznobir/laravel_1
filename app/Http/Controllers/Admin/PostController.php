@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,83 +23,64 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $posts = Post::get();
+        $posts = Post::query()
+            ->orderByDesc('created_at')
+            ->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Post $post
-     * @return Factory|View|Application
-     */
-    public function show(Post $post): Factory|View|Application
-    {
-        return view('admin.posts.edit-form', compact('post'));
-
-//        $post = Post::findOrFail($id);
-//        dd($post);
-    }
-
-    /**
      * Show the form for creating a new resource.
-     *
-     * @return Factory|View|Application
      */
     public function create(): Factory|View|Application
     {
-        return view('admin.posts.create-form');
+        return view('admin.posts.create');
     }
+
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param Post $post
+//     */
+//    public function show(Post $post)
+//    {
+////        $post = Post::findOrFail($id);
+////        dd($post);
+//    }
+
 
     /**
      * Store a newly created resource in storage.
-     * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(PostRequest $request): RedirectResponse
     {
-
-        $data = Validator::make($request->all(), [
-            'title' => 'required|between:2,150',
-            'preview' => 'required|between:2,50',
-            'description' => 'required|between:2,255',
-        ], [
-            'required' => 'Не заполнено поле :attribute',
-            'between' => 'Поле :attribute должно содержать не менее - :min и не более - :max символа(ов)',
-        ], [
-            'title' => 'Заголовок статьи',
-            'preview' => 'Краткое описание статьи',
-            'description' => 'Текст статьи',
-        ])->validate();
-
-        Post::create($data);
+        Post::create($request->validated());
         return redirect(route('admin.posts.index'));
-//        Post::create(['title' => 'test', 'description' => 'some text']);
-//        echo 'Новый пост создан';
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Post $post): Factory|View|Application
+    {
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param PostRequest $request
      * @param Post $post
      * @return Application|Redirector|RedirectResponse
-     * @throws ValidationException
      */
-    public function update(Request $request, Post $post): Application|Redirector|RedirectResponse
+    public function update(PostRequest $request, Post $post): Application|Redirector|RedirectResponse
     {
-        $data = Validator::make($request->all(), [
-            'title' => 'required|between:2,150',
-            'preview' => 'required|between:2,50',
-            'description' => 'required|between:2,255',
-        ], [
-            'required' => 'Не заполнено поле :attribute',
-            'between' => 'Поле :attribute должно содержать не менее - :min и не более - :max символа(ов)',
-        ], [
-            'title' => 'Заголовок статьи',
-            'preview' => 'Краткое описание статьи',
-            'description' => 'Текст статьи',
-        ])->validate();
-
+        $data = $request->validated();
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail')->store('storage/posts');
+            $data['thumbnail'] = $thumbnail;
+        }
         $post->update($data);
         return redirect(route('admin.posts.index'));
     }
@@ -106,23 +88,23 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $id
+     * @param Post $post
      * @return Application|Redirector|RedirectResponse
      */
-    public function destroy($id): Application|Redirector|RedirectResponse
+    public function destroy(Post $post): Application|Redirector|RedirectResponse
     {
-        Post::destroy($id);
+        $post->delete();
         return redirect(route('admin.posts.index'));
     }
 
 
-    /**
-     * @return void
-     */
-    public function deleteLast(): void
-    {
-        Post::latest()->first()->delete();
-        echo 'Последний пост удален';
-    }
+//    /**
+//     * @return void
+//     */
+//    public function deleteLast(): void
+//    {
+//        Post::latest()->first()->delete();
+//        echo 'Последний пост удален';
+//    }
 
 }

@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -17,7 +18,7 @@ class AuthController extends Controller
     /**
      * Display the login view.
      */
-    public function index(): Factory|View|Application
+    public function create(): Factory|View|Application
     {
         return view('admin.auth.login');
     }
@@ -26,7 +27,7 @@ class AuthController extends Controller
      * Confirm the user's password.
      * @throws ValidationException
      */
-    public function login(NameRequest $request): RedirectResponse
+    public function store(NameRequest $request): RedirectResponse
     {
 
         $data = $request->validated();
@@ -40,9 +41,20 @@ class AuthController extends Controller
                 'password' => __('auth.password'),
             ]);
         }
+//        $request->session()->regenerate();
+//        $request->session()->put('auth.password_confirmed_at', time());
 
-        $request->session()->put('auth.password_confirmed_at', time());
-
-        return redirect()->intended(route('admin.index', absolute: false));
+//        return redirect()->intended(route('admin.posts.index', absolute: false));
+        return redirect(route('admin.posts.index'));
+    }
+    /**
+     * Destroy an authenticated session.
+     */
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::guard('admin')->logout();
+//        $request->session()->invalidate();
+//        $request->session()->regenerateToken();
+        return redirect(route('dashboard'));
     }
 }

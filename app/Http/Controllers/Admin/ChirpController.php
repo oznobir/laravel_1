@@ -21,8 +21,9 @@ class ChirpController extends Controller
     public function index(): Factory|View|Application
     {
 //        return view('chirps.index');
-        return view('chirps.index', [
-            'chirps' => Chirp::with('user')->latest()->get(),
+        $chirps = Chirp::with('user')->latest()->paginate(3);
+        return view('admin.chirps.index', [
+            'chirps' => $chirps,
         ]);
     }
 

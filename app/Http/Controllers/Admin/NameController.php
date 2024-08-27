@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ChirpRequest;
+use App\Http\Requests\NameRequest;
 use App\Models\Name;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class NameController extends Controller
@@ -58,12 +57,9 @@ class NameController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function store(ChirpRequest $request): Application|Redirector|RedirectResponse
+    public function store(NameRequest $request): Application|Redirector|RedirectResponse
     {
-        Name::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name')
-        ]);
+        Name::create($request->validated());
         return redirect(route('admin.names.index'));
 
 //        Name::create($request->all());
@@ -93,7 +89,7 @@ class NameController extends Controller
      */
     public function create (): Factory|View|Application
     {
-        return view('admin.names.create-form');
+        return view('admin.names.create');
     }
 
     /**
@@ -101,7 +97,7 @@ class NameController extends Controller
      */
     public function show(Name $name): Factory|View|Application
     {
-        return view('admin.names.edit-form', [
+        return view('admin.names.edit', [
             'name' => $name,
         ]);
 
@@ -118,7 +114,7 @@ class NameController extends Controller
      */
     public function edit(Name $name): Factory|View|Application
     {
-        return view('admin.names.edit-form', [
+        return view('admin.names.edit', [
             'name' => $name,
         ]);
     }
@@ -126,11 +122,11 @@ class NameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ChirpRequest $request
+     * @param NameRequest $request
      * @param Name $name
      * @return Application|Redirector|RedirectResponse
      */
-    public function update(ChirpRequest $request, Name $name): Application|Redirector|RedirectResponse
+    public function update(NameRequest $request, Name $name): Application|Redirector|RedirectResponse
     {
         $name->update($request->validated());
         return redirect(route('admin.names.index'));

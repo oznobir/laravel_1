@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChirpRequest;
 use App\Models\Chirp;
 use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 
 class ChirpController extends Controller
 {
+    /**
+     * @throws AuthorizationException
+     */
     public function show(Post $post, Chirp $chirp): View
     {
         Gate::authorize('update', $chirp);
@@ -35,6 +39,7 @@ class ChirpController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws AuthorizationException
      */
     public function update(ChirpRequest $request, Post $post, Chirp $chirp): RedirectResponse
     {
@@ -48,6 +53,7 @@ class ChirpController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @throws AuthorizationException
      */
     public function destroy(Post $post, Chirp $chirp): RedirectResponse
     {
