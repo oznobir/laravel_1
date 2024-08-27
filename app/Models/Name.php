@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasRolesAndPermissions;
 use Database\Factories\NameFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,6 +26,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read mixed $full_name
+ * @property mixed $roles
+ * @property mixed $permissions
  * @method static NameFactory factory($count = null, $state = [])
  * @method static Builder|Name namesOnChar(string $char)
  * @method static Builder|Name namesOnCharP()
@@ -43,15 +46,13 @@ use Illuminate\Support\Carbon;
  */
 class Name extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasRolesAndPermissions;
 
     protected $fillable = [
         'first_name',
         'last_name',
-        'type',
         'password',
     ];
-//    protected $guarded = [];
 
     /**
      * @param Builder $query
@@ -68,12 +69,12 @@ class Name extends Authenticatable
     /**
      * @param Builder $query
      * @param string $char
-
+     * @return Builder
      * @uses scopeNamesOnChar
      */
-    public function scopeNamesOnChar(Builder $query, string $char): void
+    public function scopeNamesOnChar(Builder $query, string $char): Builder
     {
-       $query
+        return $query
             ->where($this->fillable[0], 'LIKE', $char . '%')
             ->orWhere($this->fillable[1], 'LIKE', $char . '%');
     }

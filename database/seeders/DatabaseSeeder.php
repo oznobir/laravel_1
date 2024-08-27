@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(RoleSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(NameSeeder::class);
         // User::factory(10)->create();
         for ($i = 1; $i < 11; $i++) {
             User::factory()->create([
@@ -25,11 +28,11 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         Post::factory(30)->create();
-        Name::factory()->create([
-            'first_name' => 'Ruslan',
-            'last_name' => 'Oznor',
-            'type' => 'admin',
-            'password' => bcrypt('12345678'),
-        ]);
+//        Name::factory()->create([
+//            'first_name' => 'Ruslan',
+//            'last_name' => 'Oznor',
+//            'type' => 'admin',
+//            'password' => bcrypt('12345678'),
+//        ]);
     }
 }

@@ -34,15 +34,7 @@
                     @error('last_name')
                     <p class="text-red-500">{{ $message }}</p>
                     @enderror
-                    <input name="type"
-                           type="text"
-                           value="{{ old('type', $name->type) }}"
-                           class="w-full h-12 border @error('type') border-red-500 @enderror rounded px-3"
-                           placeholder="{{ __('validation.attributes.type') }}"
-                    />
-                    @error('type')
-                    <p class="text-red-500">{{ $message }}</p>
-                    @enderror
+
                     <input name="password"
                            type="text"
                            value="{{ old('password') }}"
@@ -52,6 +44,26 @@
                     @error('password')
                     <p class="text-red-500">{{ $message }}</p>
                     @enderror
+
+                    <div class="bg-white">
+                        <div class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <div class="text-sm leading-5 text-gray-900">
+                                <div>{{ __('Roles') }}:</div>
+                                @foreach($name->roles as $role)
+                                    {{ $role->name }}
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <div class="text-sm leading-5 text-gray-900">
+                                <div>{{ __('Permissions') }}:</div>
+                                @foreach($name->permissions as $permission)
+                                    {{ $permission->name }}
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="text-center w-48 bg-blue-900 rounded-md text-white py-3 font-medium">
                         {{ __('Save') }}
                     </button>

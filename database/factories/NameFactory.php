@@ -27,7 +27,7 @@ class NameFactory extends Factory
         return [
             'first_name' => fake()->name(),
             'last_name' => fake()->text(10),
-            'type' => fake()->name(),
+//            'type' => fake()->name(),
             'password' => static::$password ??= Hash::make('12345678'),
             'remember_token' => Str::random(10),
         ];

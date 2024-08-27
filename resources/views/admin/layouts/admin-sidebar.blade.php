@@ -40,6 +40,7 @@
             {{ __('Chirps') }}
         </span>
     </a>
+    @role('admin')
     <a class="flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100"
        href="{{ route('admin.names.index') }}"
     >
@@ -54,5 +55,6 @@
             {{ __('Names') }}
         </span>
     </a>
+    @endrole
 </nav>
 
