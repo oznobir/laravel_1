@@ -5,19 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NameRequest;
 use App\Models\Name;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Gate;
 
-class NameController extends Controller
+class NameController extends AdminController
 {
     /**
      * Display a listing of the resource.
+     * @throws AuthorizationException
      */
     public function index(): View
     {
+        $this->checkGate('show-names');
+
         $names = Name::get();
         return view('admin.names.index', compact('names'));
 
@@ -56,9 +61,12 @@ class NameController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @throws AuthorizationException
      */
     public function store(NameRequest $request): Application|Redirector|RedirectResponse
     {
+        $this->checkGate('create-names');
+
         Name::create($request->validated());
         return redirect(route('admin.names.index'));
 
@@ -86,17 +94,23 @@ class NameController extends Controller
      * Store a newly created resource in storage.
      *
      * @return Factory|View|Application
+     * @throws AuthorizationException
      */
     public function create (): Factory|View|Application
     {
+        $this->checkGate('create-names');
+
         return view('admin.names.create');
     }
 
     /**
      * Display the specified resource.
+     * @throws AuthorizationException
      */
     public function show(Name $name): Factory|View|Application
     {
+        $this->checkGate('show-names');
+
         return view('admin.names.edit', [
             'name' => $name,
         ]);
@@ -111,9 +125,12 @@ class NameController extends Controller
      *
      * @param Name $name
      * @return Factory|View|Application
+     * @throws AuthorizationException
      */
     public function edit(Name $name): Factory|View|Application
     {
+        $this->checkGate('edit-names');
+
         return view('admin.names.edit', [
             'name' => $name,
         ]);
@@ -125,9 +142,12 @@ class NameController extends Controller
      * @param NameRequest $request
      * @param Name $name
      * @return Application|Redirector|RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(NameRequest $request, Name $name): Application|Redirector|RedirectResponse
     {
+        $this->checkGate('edit-names');
+
         $name->update($request->validated());
         return redirect(route('admin.names.index'));
 
@@ -143,9 +163,12 @@ class NameController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @throws AuthorizationException
      */
     public function destroy(Name $name): Application|Redirector|RedirectResponse
     {
+        $this->checkGate('delete-names');
+
         Name::destroy($name);
         return redirect(route('admin.names.index'));
 

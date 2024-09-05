@@ -12,12 +12,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded-lg shadow-2xl">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="flex p-6 ">
-                        <img src="{{ url('storage/posts/' . $post->thumbnail) }}" alt="img">
+                    <div class="flex p-6 gap-6">
+                        <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="img">
                         <div class="font-bold text-2xl text-gray-800 dark:text-gray-100">{!! $post->preview !!}</div>
                     </div>
-                    <div class="px-4 py-2 mt-2 bg-white dark:bg-gray-600">
-                        <p class="sm:text-sm text-xl text-gray-700 px-2 mr-1 my-3">
+                    <div class="px-4 py-2 mt-2">
+                        <p class="sm:text-sm text-xl px-2 mr-1 my-3">
                             {!! $post->description !!}
                         </p>
                     </div>
@@ -31,12 +31,12 @@
                               class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                     >{{ old('message') }}</textarea>
                     <x-input-error :messages="$errors->get('message')" class="mt-2"/>
-                    <x-primary-button class="mt-4">Отправить</x-primary-button>
+                    <x-blue-button class="mt-4">Отправить</x-blue-button>
                 </form>
-                <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+                <div class="mt-6  bg-white text-gray-800 shadow-sm rounded-lg divide-y">
                     @foreach ($chirps as $chirp)
                         <div class="p-6 flex space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 -scale-x-100"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 -scale-x-100"
                                  fill="none"
                                  viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -45,11 +45,11 @@
                             <div class="flex-1">
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-gray-800">{{ $chirp->user->name }}</span>
-                                        <small class="ml-2 text-sm text-gray-600">{{ $chirp->created_at->format('j M Y, g:i a') }}</small>
+                                        <span>{{ $chirp->user->name }}</span>
+                                        <small class="ml-2 text-sm text-indigo-500">{{ $chirp->created_at }}</small>
                                         @unless ($chirp->created_at->eq($chirp->updated_at))
-                                            <small class="text-sm text-gray-600">
-                                                &middot;Изменено {{ $chirp->updated_at }}
+                                            <small>
+                                                &middot;{{ __('Changed') }} {{ $chirp->updated_at }}
                                             </small>
                                         @endunless
                                     </div>
@@ -66,14 +66,14 @@
                                             </x-slot>
                                             <x-slot name="content">
                                                 <x-dropdown-link :href="route('chirps.show', [$post, $chirp])">
-                                                    Изменить
+                                                    {{ __('Change') }}
                                                 </x-dropdown-link>
                                                 <form method="POST" action="{{ route('chirps.destroy', [$post, $chirp]) }}">
                                                     @csrf
                                                     @method('delete')
                                                     <x-dropdown-link :href="route('chirps.destroy', [$post, $chirp])"
                                                                      onclick="event.preventDefault(); this.closest('form').submit();">
-                                                        Удалить
+                                                        {{ __('Delete') }}
                                                     </x-dropdown-link>
                                                 </form>
                                             </x-slot>

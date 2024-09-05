@@ -16,9 +16,9 @@
                         <div class="mt-6 flex flex-col items-start gap-4 rounded-lg p-6 bg-white dark:bg-gray-900 shadow ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                             <h2 class="text-xl font-semibold text-black dark:text-white">{{ $post->title }}</h2>
                             <div class="flex items-center gap-6 lg:flex-row">
-                                <img src="{{ url('storage/posts/' . $post->thumbnail) }}" alt="img">
+                                <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="img">
                                 <div>{!! $post->preview !!}</div>
-                                <a href="{{ route('posts.show', $post->id) }}" class="relative flex items-center gap-6 lg:items-end">
+                                <a href="{{ route('posts.show', $post) }}" class="relative flex items-center gap-6 lg:items-end">
                                     <div class="flex items-center gap-6 lg:flex-row">
                                         <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 sm:size-16">
                                             <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none"

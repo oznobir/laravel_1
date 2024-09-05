@@ -5,7 +5,6 @@ namespace App\Models;
 use Database\Factories\PostFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -56,20 +55,20 @@ class Post extends Model
 //    protected $guarded = [];
 
     protected $casts = [
-        'expired_at' => 'datetime',
+//        'expired_at' => 'datetime',
     ];
 
-    /**
-     * @return Attribute
-     */
-    public function description(): Attribute
-    {
-        $id = self::max('id') + 1;
-
-        return Attribute::make(
-            set: fn(string $value) => 'Пост ' . $id . ': ' . $value
-        );
-    }
+//    /**
+//     * @return Attribute
+//     */
+//    protected function description(): Attribute
+//    {
+//        $id = self::max('id') + 1;
+//
+//        return Attribute::make(
+//            set: fn(string $value) => 'Пост ' . $id . ': ' . $value
+//        );
+//    }
     /**
      * @return HasMany
      * @uses chirps

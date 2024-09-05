@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Events\ChirpCreated;
+use Database\Factories\ChirpFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Post $post
+ * @method static ChirpFactory factory($count = null, $state = [])
  * @method static Builder|Chirp newModelQuery()
  * @method static Builder|Chirp newQuery()
  * @method static Builder|Chirp query()
@@ -30,7 +33,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Chirp wherePostId($value)
  * @method static Builder|Chirp whereUpdatedAt($value)
  * @method static Builder|Chirp whereUserId($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Chirp extends Model
 {

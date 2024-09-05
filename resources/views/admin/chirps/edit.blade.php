@@ -45,7 +45,7 @@
                     <div>
                         @if($post->thumbnail)
                             <img class="h-64 w-64"
-                                 src="{{ asset('storage/posts/'.$post->thumbnail) }}" alt="{{ $post->title }}">
+                                 src="{{ asset('storage/'.$post->thumbnail) }}" alt="{{ $post->title }}">
                         @endif
                     </div>
                     <input type="file"

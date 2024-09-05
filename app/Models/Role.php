@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property mixed|string $name
  * @property mixed|string $slug
  * @method static where(string $string, string $string1)
+ * @method static create(string[] $array)
  */
 class Role extends Model
 {
@@ -17,6 +18,6 @@ class Role extends Model
 
     public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class,'roles_permissions');
+        return $this->belongsToMany(Permission::class,'permission_role');
     }
 }

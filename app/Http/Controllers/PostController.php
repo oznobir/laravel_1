@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function show(Post $post): Factory|View|Application
     {
-        $chirps = $post->chirps()->latest()->get();
+        $chirps = $post->chirps()->with(['user'])->latest()->get();
         return view('posts.show', compact('post', 'chirps'));
     }
 }

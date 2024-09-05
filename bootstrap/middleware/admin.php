@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Middleware\RoleMiddleware;
 
 return [
-//    RoleMiddleware::class,
     Illuminate\Cookie\Middleware\EncryptCookies::class,
     Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
     Illuminate\Session\Middleware\StartSession::class,

@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:admin')->group(function () {
     Route::resource('posts', PostController::class)
-        ->only(['index', 'create', 'edit', 'store', 'destroy', 'update']);
+        ->only(['index', 'create', 'show', 'edit', 'store', 'destroy', 'update']);
     Route::resource('users', UserController::class)
         ->only(['index', 'create', 'show', 'store', 'destroy']);
     Route::resource('names', NameController::class)
-        ->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
+        ->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy'])
+        ->middleware('role:admin');
     Route::resource('chirps', ChirpController::class)
         ->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
     Route::get('logout', [AuthController::class, 'logout'])

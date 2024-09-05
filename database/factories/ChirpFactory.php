@@ -2,14 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Chirp;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
 /**
- * @extends Factory<Post>
+ * @extends Factory<Chirp>
  */
-class PostFactory extends Factory
+class ChirpFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,11 +20,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->text(150),
-            'description' => fake()->text(4000),
-            'preview' => fake()->text(950),
-            'thumbnail' => 'posts/'. fake()->image('storage/app/public/posts/', 480, 480, null, false)
+            'message' => fake()->text(25),
+            'user_id' => User::all()->random()->id,
+            'post_id' => Post::all()->random()->id,
         ];
     }
-
 }
